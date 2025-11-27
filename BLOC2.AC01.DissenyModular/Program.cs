@@ -2,74 +2,67 @@
 {
     public static void Main()
     {
-        TempreratureConvertor();
+        //int userNumber = 52814
+        int userNumber = UserIntput();
+        Console.WriteLine($"Numero introduit: {userNumber}");
+        Console.WriteLine($"Suma de xifres parelles: {EvenAddition(userNumber)}");
+        Console.WriteLine($"Suma de xifres senars: {NumberProduct(userNumber)}");
+        Console.WriteLine($"La xifra mes gran dins del numero es: {BiggestNumber(userNumber)}");
     }
 
-    public static void TempreratureConvertor()
+    public static int EvenAddition(int number)
     {
-        Console.WriteLine("Welcome to the Temperature Converter!\nEnter your temperature:");
-        float userTemperature = UserIntput();
-        Console.WriteLine("What conversion you want to do?\n1: Celsius a Fahrenheit\n2: Fahrenheit a Celsius\n3: Celsius a Kelvin");
-        int conversionType = (int)UserIntput(1, 3);
-
-        switch (conversionType)
+        int sum = 0;
+        int digit;
+        string numberString = number.ToString();
+        for (int i = 2; i <= numberString.Length; i += 2)
         {
-            case 1:
-                float fahrenheit = CelsiusToFahrenheit(userTemperature);
-                Console.WriteLine($"{userTemperature}°C is equal to {fahrenheit}°F");
-                break;
-            case 2:
-                float celsius = FahrenheitToCelsius(userTemperature);
-                Console.WriteLine($"{userTemperature}°F is equal to {celsius}°C");
-                break;
-            case 3:
-                float kelvin = CelsiusToKelvin(userTemperature);
-                Console.WriteLine($"{userTemperature}°C is equal to {kelvin}K");
-                break;
+            digit = int.Parse(numberString[i-1].ToString());
+            sum += digit;
         }
+        return sum;
     }
 
-    public static float CelsiusToKelvin(float celsius)
+    public static int NumberProduct(int number)
     {
-        return celsius + 273.15f;
+        int sum = 1;
+        int digit;
+        string numberString = number.ToString();
+        for (int i = 0; i < numberString.Length; i += 2)
+        {
+            digit = int.Parse(numberString[i].ToString());
+            sum = sum * digit;
+        }
+        return sum;
     }
 
-    public static float FahrenheitToCelsius(float fahrenheit)
+    public static int BiggestNumber(int number)
     {
-        return (fahrenheit - 32) * 5 / 9;
+        int biggestNum = 0;
+        int digit;
+        string numberString = number.ToString();
+        for (int i = 0; i < numberString.Length; i ++)
+        {
+            digit = int.Parse(numberString[i].ToString());
+            if (biggestNum <= digit)
+            {
+                biggestNum = digit;
+            }
+        }
+        return biggestNum;
     }
 
-    public static float CelsiusToFahrenheit(float celsius)
-    {
-        return (celsius * 9 / 5) + 32;
-    }
 
-    public static float UserIntput()
+    public static int UserIntput()
     {
-        float userNumber;
+        int userNumber;
         bool isValidInput = true;
 
         do
         {
             Console.WriteLine(isValidInput ? $"Please enter a number" : "Invalid input. Please enter a valid number.");
-            isValidInput = float.TryParse(Console.ReadLine(), out userNumber);
+            isValidInput = int.TryParse(Console.ReadLine(), out userNumber);
         } while (!isValidInput);
-
-        return userNumber;
-    }
-
-    public static float UserIntput(int min, int max)
-    {
-        float userNumber;
-        bool isValidInput = true;
-        bool isInRange = true;
-
-        do
-        {
-            Console.WriteLine((isValidInput && isInRange) ? $"Please enter a number" : "Invalid input. Please enter a valid number.");
-            isValidInput = float.TryParse(Console.ReadLine(), out userNumber);
-            isInRange = userNumber >= min && userNumber <= max;
-        } while (!(isValidInput && isInRange));
 
         return userNumber;
     }

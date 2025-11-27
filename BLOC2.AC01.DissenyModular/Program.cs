@@ -2,68 +2,53 @@
 {
     public static void Main()
     {
-        //int userNumber = 52814
+        //int userNumber = 60;
         int userNumber = UserIntput();
-        Console.WriteLine($"Numero introduit: {userNumber}");
-        Console.WriteLine($"Suma de xifres parelles: {EvenAddition(userNumber)}");
-        Console.WriteLine($"Suma de xifres senars: {NumberProduct(userNumber)}");
-        Console.WriteLine($"La xifra mes gran dins del numero es: {BiggestNumber(userNumber)}");
+
+        
     }
 
-    public static int EvenAddition(int number)
+    public static void NumberFactorization(int num)
     {
-        int sum = 0;
-        int digit;
-        string numberString = number.ToString();
-        for (int i = 2; i <= numberString.Length; i += 2)
-        {
-            digit = int.Parse(numberString[i-1].ToString());
-            sum += digit;
-        }
-        return sum;
+        
     }
-
-    public static int NumberProduct(int number)
-    {
-        int sum = 1;
-        int digit;
-        string numberString = number.ToString();
-        for (int i = 0; i < numberString.Length; i += 2)
-        {
-            digit = int.Parse(numberString[i].ToString());
-            sum = sum * digit;
-        }
-        return sum;
-    }
-
-    public static int BiggestNumber(int number)
-    {
-        int biggestNum = 0;
-        int digit;
-        string numberString = number.ToString();
-        for (int i = 0; i < numberString.Length; i ++)
-        {
-            digit = int.Parse(numberString[i].ToString());
-            if (biggestNum <= digit)
-            {
-                biggestNum = digit;
-            }
-        }
-        return biggestNum;
-    }
-
 
     public static int UserIntput()
     {
         int userNumber;
         bool isValidInput = true;
+        bool isNatural = true;
 
         do
         {
-            Console.WriteLine(isValidInput ? $"Please enter a number" : "Invalid input. Please enter a valid number.");
+            Console.WriteLine(isValidInput && isNatural ? $"Please enter a number" : "Invalid input. Please enter a valid number.");
             isValidInput = int.TryParse(Console.ReadLine(), out userNumber);
-        } while (!isValidInput);
+            isNatural = userNumber > 0;
+        } while (!(isValidInput && isNatural));
 
         return userNumber;
+    }
+
+    public static bool IsPrime(int num) //  la verdad es que lo saque de internet, pero entiendo como funciona
+    {
+        bool isPrime;
+        if (num <= 1)
+            isPrime = false;
+
+        if (num == 2)
+            isPrime = true;
+
+        if (num % 2 == 0)
+            isPrime = false;
+
+        
+        for (int i = 3; i * i <= num; i += 2)
+        {
+            if (num % i == 0)
+                isPrime = false;
+        }
+
+        isPrime = true;
+        return isPrime;
     }
 }

@@ -2,6 +2,11 @@
 {
     public static void Main()
     {
-        Console.WriteLine("Hello, World!");
+        
+    }
+
+    public static string UserDateIntput()
+    {
+        return "27/01/2006";
     }
 }

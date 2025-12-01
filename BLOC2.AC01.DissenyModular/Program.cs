@@ -1,16 +1,27 @@
-﻿public class Program
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+public class Program
 {
     public static void Main()
     {
         //int userNumber = 60;
         int userNumber = UserIntput();
-
-        
+        NumberFactorization(userNumber);
     }
 
     public static void NumberFactorization(int num)
     {
-        
+        int factor;
+        Console.WriteLine($"The prime factorization of {num} is:");
+        for (factor = 2; factor <= num; factor++)
+        {
+            while (IsPrime(factor) && num % factor == 0)
+            {
+                Console.Write(factor + " ");
+                num /= factor;
+            }
+        }
+        Console.WriteLine();
     }
 
     public static int UserIntput()
@@ -29,26 +40,16 @@
         return userNumber;
     }
 
-    public static bool IsPrime(int num) //  la verdad es que lo saque de internet, pero entiendo como funciona
+    public static bool IsPrime(int num)
     {
-        bool isPrime;
-        if (num <= 1)
-            isPrime = false;
-
-        if (num == 2)
-            isPrime = true;
-
-        if (num % 2 == 0)
-            isPrime = false;
-
-        
-        for (int i = 3; i * i <= num; i += 2)
+        if (num <= 1) return false;
+        for (int i = 2; i <= Math.Sqrt(num); i++)
         {
             if (num % i == 0)
-                isPrime = false;
+            {
+                return false;
+            }
         }
-
-        isPrime = true;
-        return isPrime;
+        return true;
     }
 }

@@ -5,10 +5,13 @@
         //int userNumber = 52814
         int userNumber = UserIntput();
         Console.WriteLine($"Numero introduit: {userNumber}");
-        Console.WriteLine($"Suma de xifres parelles: {EvenAddition(userNumber)}");
+        Console.WriteLine($"Suma de les xifres que ocupen posicions parells: {EvenAddition(userNumber)}");
         Console.WriteLine($"Suma de xifres senars: {NumberProduct(userNumber)}");
         Console.WriteLine($"La xifra mes gran dins del numero es: {BiggestNumber(userNumber)}");
+        Console.WriteLine($"La xifra mes petita dins del numero es: {SmallestNumber(userNumber)}");
     }
+
+    // se puede refactorizar para evitar repetir codigo
 
     public static int EvenAddition(int number)
     {
@@ -50,6 +53,22 @@
             }
         }
         return biggestNum;
+    }
+
+    public static int SmallestNumber(int number)
+    {
+        int smallestNum = number;
+        int digit;
+        string numberString = number.ToString();
+        for (int i = 0; i < numberString.Length; i++)
+        {
+            digit = int.Parse(numberString[i].ToString());
+            if (smallestNum >= digit)
+            {
+                smallestNum = digit;
+            }
+        }
+        return smallestNum;
     }
 
 

@@ -1,4 +1,6 @@
-﻿public class Program
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+public class Program
 {
     public static void Main()
     {
@@ -12,6 +14,27 @@
     }
 
     // se puede refactorizar para evitar repetir codigo
+    public static  void MinMaxNums(int num, out int minNum, out int maxNum)//hehe
+    {
+
+        maxNum = 0;
+        minNum = num;
+        int digit;
+        string numberString = num.ToString();
+        for (int i = 0; i < numberString.Length; i++)
+        {
+            digit = int.Parse(numberString[i].ToString());
+            if (maxNum <= digit)
+            {
+                maxNum = digit;
+            }
+            if (minNum >= digit)
+            {
+                minNum = digit;
+            }
+        }
+    }
+
 
     public static int EvenAddition(int number)
     {

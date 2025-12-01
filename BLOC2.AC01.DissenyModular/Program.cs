@@ -1,4 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System;
 
 public class Program
 {
@@ -15,7 +15,7 @@ public class Program
         Console.WriteLine($"The prime factorization of {num} is:");
         for (factor = 2; factor <= num; factor++)
         {
-            while (IsPrime(factor) && num % factor == 0)
+            while (IsPrime(factor) && (num % factor == 0))
             {
                 Console.Write(factor + " ");
                 num /= factor;
@@ -27,12 +27,11 @@ public class Program
     public static int UserIntput()
     {
         int userNumber;
-        bool isValidInput = true;
-        bool isNatural = true;
+        bool isValidInput = true, isNatural = true;
 
         do
         {
-            Console.WriteLine(isValidInput && isNatural ? $"Please enter a number" : "Invalid input. Please enter a valid number.");
+            Console.WriteLine(isValidInput && isNatural ? "Please enter a number" : "Invalid input. Please enter a valid number.");// constantes
             isValidInput = int.TryParse(Console.ReadLine(), out userNumber);
             isNatural = userNumber > 0;
         } while (!(isValidInput && isNatural));
@@ -43,7 +42,7 @@ public class Program
     public static bool IsPrime(int num)
     {
         if (num <= 1) return false;
-        for (int i = 2; i <= Math.Sqrt(num); i++)
+        for (int i = 2; i <= Math.Sqrt(num); i++)// raiz quadrada de num
         {
             if (num % i == 0)
             {

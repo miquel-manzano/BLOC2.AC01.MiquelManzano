@@ -43,6 +43,15 @@
             return false;
         }
 
+        string dateNums = "";
+        foreach (char c in date)
+        {
+            if (c != '/')
+            {
+                dateNums += c;
+            }
+        }
+
         
 
 
